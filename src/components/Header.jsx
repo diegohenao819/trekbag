@@ -1,6 +1,6 @@
 
 
-const Header = () => {
+const Header = ({totalItems, totalChecked}) => {
     return (
         <div className="header">
 
@@ -10,7 +10,7 @@ const Header = () => {
 
 
             <div className="counter">
-                <span> <b> 1 </b>/ 3 Items packed</span>
+                <span> <b> {totalChecked} </b>/ {totalItems} Items packed</span>
             </div>
 
         </div>

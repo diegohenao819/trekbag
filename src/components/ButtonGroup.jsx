@@ -1,12 +1,14 @@
-import { secondaryButtons } from "../lib/constants";
+
 import Button from "./Button";
 
-const ButtonGroup = () => {
+const ButtonGroup = ({handleDeleteAll, resetAll, markAllComplete, markAllIncomplete}) => {
   return (
     <section className="button-group">
-      {secondaryButtons.map((text) => {
-        return <Button key={text}>{text}</Button>;
-      })}
+      <Button onClick={markAllComplete}>Mark all as Complete</Button>
+      <Button onClick={markAllIncomplete}>Mark all as Incomplete</Button>
+      <Button onClick={resetAll}>Reset to Initial</Button>
+      <Button onClick={handleDeleteAll}>Remove all Items</Button>
+      
     </section>
   );
 };
