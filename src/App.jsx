@@ -8,8 +8,6 @@ import { initialItems } from "./lib/constants";
 
 function App() {
   const [items, setItems] = useState(initialItems);
-  
- 
 
   const handleDeleteAll = () => {
     setItems([]);
@@ -38,7 +36,6 @@ function App() {
     setItems(updatedItems);
   };
 
-
   const markChecked = (id) => {
     const updatedItems = items.map((item) => {
       if (item.id === id) {
@@ -47,20 +44,20 @@ function App() {
       return item;
     });
     setItems(updatedItems);
-  }
+  };
 
   return (
     <>
       <BackgroundHeading />
       <main>
-        <Header 
-        totalItems={items.length} 
-        totalChecked= {items.filter((item) => item.packed == true).length}
+        <Header
+          totalItems={items.length}
+          totalChecked={items.filter((item) => item.packed == true).length}
         />
-        <ItemList 
-        items={items} 
-        handleDeleteItem={handleDeleteItem} 
-        markChecked={markChecked}
+        <ItemList
+          items={items}
+          handleDeleteItem={handleDeleteItem}
+          markChecked={markChecked}
         />
         <Sidebar
           setItems={setItems}
