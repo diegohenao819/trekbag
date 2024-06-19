@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import BackgroundHeading from "./components/BackgroundHeading";
 import Header from "./components/Header";
 import ItemList from "./components/ItemList";
@@ -7,7 +7,11 @@ import "./index.css";
 import { initialItems } from "./lib/constants";
 
 function App() {
-  const [items, setItems] = useState(initialItems);
+  const [items, setItems] = useState(() => {
+    return localStorage.getItem("items")
+      ? JSON.parse(localStorage.getItem("items"))
+      : initialItems;
+  });
 
   const handleDeleteAll = () => {
     setItems([]);
@@ -45,6 +49,10 @@ function App() {
     });
     setItems(updatedItems);
   };
+
+  useEffect(() => {
+    localStorage.setItem("items", JSON.stringify(items));
+  }, [items]);
 
   return (
     <>
