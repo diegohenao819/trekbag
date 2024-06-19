@@ -1,4 +1,10 @@
-const Item = ({ item, handleDeleteItem, markChecked }) => {
+import { useItemsStore } from "../stores/itemsStore";
+
+const Item = ({ item}) => {
+  const markChecked = useItemsStore((state)=> state.markChecked);
+  const handleDeleteItem = useItemsStore((state)=> state.handleDeleteItem);
+  
+
   return (
     <li className="item">
       <label>

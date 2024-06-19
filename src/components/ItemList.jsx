@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import Select from "react-select";
+import { useItemsStore } from "../stores/itemsStore";
 import EmptyView from "./EmptyView";
 import Item from "./Item";
 
@@ -18,18 +19,26 @@ const sortingOptions = [
   },
 ];
 
-const ItemList = ({ items, handleDeleteItem, markChecked }) => {
+const ItemList = () => {
+  const items = useItemsStore((state)=> state.items);
+ 
   const [sortBy, setSortBy] = useState("default");
 
-  const sortedItems = [...items].sort((a, b) => {
-    if (sortBy === "packed") {
-      return b.packed - a.packed;
-    }
-    if (sortBy === "unpacked") {
-      return a.packed - b.packed;
-    }
-    return;
-  });
+  const sortedItems = useMemo(
+    () =>
+      [...items].sort((a, b) => {
+        if (sortBy === "packed") {
+          return b.packed - a.packed;
+        }
+
+        if (sortBy === "unpacked") {
+          return a.packed - b.packed;
+        }
+
+        return;
+      }),
+    [items, sortBy]
+  );
 
   return (
     <ul className="item-list">
@@ -50,8 +59,7 @@ const ItemList = ({ items, handleDeleteItem, markChecked }) => {
           <Item
             key={item.id}
             item={item}
-            handleDeleteItem={handleDeleteItem}
-            markChecked={markChecked}
+           
           />
         );
       })}

@@ -1,6 +1,8 @@
+import { useItemsStore } from "../stores/itemsStore";
 
 
-const Header = ({totalItems, totalChecked}) => {
+const Header = () => {
+    const items = useItemsStore((state) => state.items);
     return (
         <div className="header">
 
@@ -10,7 +12,7 @@ const Header = ({totalItems, totalChecked}) => {
 
 
             <div className="counter">
-                <span> <b> {totalChecked} </b>/ {totalItems} Items packed</span>
+                <span> <b> {items.filter((item) => item.packed).length} </b>/ {items.length} Items packed</span>
             </div>
 
         </div>
