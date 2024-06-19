@@ -7,13 +7,13 @@ export const useItemsStore = create(
         (set) => ({
             items: initialItems,
             setItems: (newItemText) => {
-              const newItem = {
-                id: new Date().getTime(),
-                name: newItemText,
-                packed: false,
-              };
-      
-              set((state) => ({ items: [...state.items, newItem] }));
+                const newItem = {
+                    id: new Date().getTime(),
+                    name: newItemText,
+                    packed: false,
+                };
+
+                set((state) => ({ items: [...state.items, newItem] }));
             },
 
 
